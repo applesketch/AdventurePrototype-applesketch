@@ -2,6 +2,13 @@ class Scene2 extends AdventureScene {
     constructor() {
         super("scene2", "The second room has a long name (it truly does).");
     }
+
+    preload() {
+        this.load.path = "./img/";
+        this.load.image("studio", "studio.png");
+        this.load.audio("boom", "boom.mp3");
+    }
+
     onEnter() {
         this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
             .setFontSize(this.s * 2)

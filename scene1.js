@@ -5,8 +5,8 @@ class Scene1 extends AdventureScene {
 
     preload() {
         this.load.path = "./img/";
-        this.load.image("studio", "studio.png");
-        this.load.audio("boom", "boom.mp3");
+        this.load.image("door", "door.png");
+        //this.load.audio("boom", "boom.mp3");
     }
 
     onEnter() {
@@ -16,7 +16,7 @@ class Scene1 extends AdventureScene {
             .setInteractive()
             .on('pointerover', () => this.showMessage("Metal, bent."))
             .on('pointerdown', () => {
-                this.showMessage("No touching!");
+                this.showMessage("You don't need that right now.");
                 this.tweens.add({
                     targets: clip,
                     x: '+=' + this.s,
@@ -45,7 +45,7 @@ class Scene1 extends AdventureScene {
                 });
             })
 
-        let door = this.add.text(this.w * 0.01, this.w * 0.3, "🚪 locked door")
+        let door = this.add.text(this.w * 0.01, this.w * 0.3, this.add.sprite(300, 250, "door"))
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
