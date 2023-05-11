@@ -141,15 +141,61 @@ class Intro extends Phaser.Scene {
         this.load.audio("boom", "boom.mp3");
     }
     create() {
-        let studio = this.add.sprite(900, 500, "studio")
-        this.time.delayedCall(2000, () => {
-            this.cameras.main.fadeOut(2000, 255,255,255);
-            this.time.delayedCall(1000, () => this.scene.start('scene1'));
-            this.sound.add("boom").play();
+        let studio = this.add.sprite(900, 500, "studio");
+        this.sound.add("boom").play();
+        this.time.delayedCall(1500, () => {
+            this.cameras.main.fadeOut(1000, 255,255,255);
+            this.time.delayedCall(900, () => this.scene.start('menu'));
         });
     }
 }
 
+// class Menu extends Phaser.Scene {
+//     constructor() {
+//         super('menu');
+//     }
+
+//     preload() {
+//         this.load.path = "./img/";
+//         this.load.image("title", "title.png");
+//         this.load.image("slug", "slug.png");
+//         this.load.audio("lobby", "lobby.mp3");
+//     }
+
+//     onEnter() {
+//         let title = this.add.sprite(300, 50, "title")
+//             .setInteractive()
+//                 .on('pointerdown', () => {
+//                     this.time.delayedCall(2000, () => {
+//                         this.cameras.main.fadeOut(2000, 255,255,255);
+//                     }); this.gotoScene('scene1');
+//                 });
+
+//         let box = this.add.text(70, 140,
+// `PLAY
+
+
+// SETTINGS
+
+
+// QUIT`
+//         );
+
+//         let circle1 = this.add.circle(50, 150, 10, 0xFF0000);
+//         let circle2 = this.add.circle(50, 190, 10, 0xFF0000);
+//         let circle3 = this.add.circle(50, 230, 10, 0xFF0000);
+        
+//         let slug = this.add.sprite(300, 300, "slug");
+//         this.add.tween({
+//             targets: slug,
+//             scale: {from: 0, to: 1},
+//             duration: 1000
+//         });
+       
+//         this.sound.add("lobby").play();
+        
+//     }
+// }
 class Menu extends Phaser.Scene {
     constructor() {
         super('menu');
@@ -158,39 +204,20 @@ class Menu extends Phaser.Scene {
     preload() {
         this.load.path = "./img/";
         this.load.image("title", "title.png");
-        this.load.audio("music1", "music1.mp3");
+        this.load.audio("lobby", "lobby.mp3");
     }
 
     create() {
-        let title = this.add.sprite(300, 50, "title");
-        let box = this.add.text(70, 140,
-`PLAY
-
-
-SETTINGS
-
-
-QUIT`
-        );
-
-        let circle1 = this.add.circle(50, 150, 10, 0xFF0000);
-        let circle2 = this.add.circle(50, 190, 10, 0xFF0000);
-        let circle3 = this.add.circle(50, 230, 10, 0xFF0000);
-        
-        let cat = this.add.sprite(300, 300, "cat");
-        this.add.tween({
-            targets: cat,
-            scale: {from: 0, to: 1},
-            duration: 1000
-        });
-       
+        let title = this.add.sprite(1000, 300, "title");
+        let box = this.add.text(800, 500, "PLAY")
+        .setFontSize(100);       
 
         this.input.on('pointerdown', () => {
             this.time.delayedCall(2000, () => {
                 this.cameras.main.fadeOut(2000, 255,255,255);
             }); this.scene.start('scene1')
             });
-        this.sound.add("siu").play();
+        this.sound.add("lobby").play();
         
     }
 }
