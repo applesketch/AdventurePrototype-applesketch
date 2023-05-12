@@ -7,12 +7,16 @@ class Scene1 extends AdventureScene {
         this.load.path = "./img/";
         this.load.image("door", "door.png");
         this.load.image("desk", "desk.png");
-        //this.load.audio("boom", "boom.mp3");
+        this.load.audio("lobby", "lobby.mp3");
+        this.load.audio("music1", "music1.mp3");
     }
 
     onEnter() {
 
-        let desk1 = this.add.sprite(300, 1000, "desk")
+        this.sound.add("music1").play();
+        this.sound.add("lobby").pause();
+
+        let desk1 = this.add.sprite(300, 900, "desk")
             .setInteractive()
             .on('pointerover', () => this.showMessage("It's a desk."))
             .on('pointerdown', () => {
@@ -26,11 +30,11 @@ class Scene1 extends AdventureScene {
                     duration: 100
                 });
             });
-        let desk2 = this.add.sprite(600, 1000, "desk")
+        let desk2 = this.add.sprite(600, 900, "desk")
             .setInteractive()
             .on('pointerover', () => this.showMessage("It's a desk."))
             .on('pointerdown', () => {
-                this.showMessage("You can't fit an entire desk into your inventory.");
+                this.showMessage("You can't carry around a desk on your adventure. It's too heavy.");
                 this.tweens.add({
                     targets: desk2,
                     x: '+=' + this.s,
@@ -40,11 +44,11 @@ class Scene1 extends AdventureScene {
                     duration: 100
                 });
             });
-        let desk3 = this.add.sprite(900, 1000, "desk")
+        let desk3 = this.add.sprite(900, 900, "desk")
             .setInteractive()
             .on('pointerover', () => this.showMessage("It's a desk."))
             .on('pointerdown', () => {
-                this.showMessage("You can't fit an entire desk into your inventory.");
+                this.showMessage("Forget it. Don't bother trying to take a desk.");
                 this.tweens.add({
                     targets: desk3,
                     x: '+=' + this.s,
@@ -55,38 +59,38 @@ class Scene1 extends AdventureScene {
                 });
             });
 
-        let key = this.add.text(this.w * 0.5, this.w * 0.1, "🔑 key")
+        let pp = this.add.text(this.w * 0.5, this.w * 0.1, "paper and pencil")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("It's a nice key.")
+                this.showMessage("It's a piece of paper and pencil.")
             })
             .on('pointerdown', () => {
-                this.showMessage("You pick up the key.");
-                this.gainItem('key');
+                this.showMessage("You pick up the paper and pencil.");
+                this.gainItem('Paper and pancil');
                 this.tweens.add({
-                    targets: key,
+                    targets: pp,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
                     duration: 500,
-                    onComplete: () => key.destroy()
+                    onComplete: () => pp.destroy()
                 });
             })
 
         let door = this.add.sprite(300, 250, "door")
             .setInteractive()
             .on('pointerover', () => {
-                if (this.hasItem("key")) {
-                    this.showMessage("You've got the key for this door.");
+                if (this.hasItem("Paper and pancil")) {
+                    this.showMessage("You are ready to head to the next room.");
                 } else {
-                    this.showMessage("It's locked. Can you find a key?");
+                    this.showMessage("You should probably take something with you before you leave...");
                 }
             })
             .on('pointerdown', () => {
-                if (this.hasItem("key")) {
-                    this.loseItem("key");
-                    this.showMessage("*squeak*");
+                if (this.hasItem("Paper and pancil")) {
+                    this.showMessage("*loud obnoxious creaking noise*");
                     this.gotoScene('scene2');
+                    this.sound.add("music1").pause();
                 }
             })
 
@@ -95,32 +99,34 @@ class Scene1 extends AdventureScene {
 
 class Scene2 extends AdventureScene {
     constructor() {
-        super("scene2", "The second room has a long name (it truly does).");
+        super("scene2", "Lounge");
     }
 
     preload() {
         this.load.path = "./img/";
-        this.load.image("studio", "studio.png");
-        this.load.audio("boom", "boom.mp3");
+        this.load.image("slug", "slug.png"); // img couch, tv, table, coffee
+        this.load.audio("music2", "music2.mp3");
     }
 
     onEnter() {
-        this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
-            .setFontSize(this.s * 2)
-            .setInteractive()
-            .on('pointerover', () => {
-                this.showMessage("You've got no other choice, really.");
-            })
-            .on('pointerdown', () => {
-                this.gotoScene('scene1');
-            });
+        // this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
+        //     .setFontSize(this.s * 2)
+        //     .setInteractive()
+        //     .on('pointerover', () => {
+        //         this.showMessage("You've got no other choice, really.");
+        //     })
+        //     .on('pointerdown', () => {
+        //         this.gotoScene('scene1');
+        //     });
 
-        let finish = this.add.text(this.w * 0.6, this.w * 0.2, '(finish the game)')
+        this.showMessage("Something feels off...");
+
+        let slug = this.add.sprite(this.w * 0.6, this.w * 0.2, "slug")
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage('*giggles*');
+                this.showMessage('💨💨💨');
                 this.tweens.add({
-                    targets: finish,
+                    targets: slug,
                     x: this.s + (this.h - 2 * this.s) * Math.random(),
                     y: this.s + (this.h - 2 * this.s) * Math.random(),
                     ease: 'Sine.inOut',
@@ -149,53 +155,7 @@ class Intro extends Phaser.Scene {
         });
     }
 }
-
-// class Menu extends Phaser.Scene {
-//     constructor() {
-//         super('menu');
-//     }
-
-//     preload() {
-//         this.load.path = "./img/";
-//         this.load.image("title", "title.png");
-//         this.load.image("slug", "slug.png");
-//         this.load.audio("lobby", "lobby.mp3");
-//     }
-
-//     onEnter() {
-//         let title = this.add.sprite(300, 50, "title")
-//             .setInteractive()
-//                 .on('pointerdown', () => {
-//                     this.time.delayedCall(2000, () => {
-//                         this.cameras.main.fadeOut(2000, 255,255,255);
-//                     }); this.gotoScene('scene1');
-//                 });
-
-//         let box = this.add.text(70, 140,
-// `PLAY
-
-
-// SETTINGS
-
-
-// QUIT`
-//         );
-
-//         let circle1 = this.add.circle(50, 150, 10, 0xFF0000);
-//         let circle2 = this.add.circle(50, 190, 10, 0xFF0000);
-//         let circle3 = this.add.circle(50, 230, 10, 0xFF0000);
-        
-//         let slug = this.add.sprite(300, 300, "slug");
-//         this.add.tween({
-//             targets: slug,
-//             scale: {from: 0, to: 1},
-//             duration: 1000
-//         });
        
-//         this.sound.add("lobby").play();
-        
-//     }
-// }
 class Menu extends Phaser.Scene {
     constructor() {
         super('menu');
@@ -204,6 +164,7 @@ class Menu extends Phaser.Scene {
     preload() {
         this.load.path = "./img/";
         this.load.image("title", "title.png");
+        this.load.image("slug", "slug.png");
         this.load.audio("lobby", "lobby.mp3");
     }
 
@@ -215,9 +176,17 @@ class Menu extends Phaser.Scene {
         this.input.on('pointerdown', () => {
             this.time.delayedCall(2000, () => {
                 this.cameras.main.fadeOut(2000, 255,255,255);
-            }); this.scene.start('scene1')
+            }); 
+            this.scene.start('scene1');
             });
         this.sound.add("lobby").play();
+
+        let slug = this.add.sprite(300, 300, "slug");
+        this.add.tween({
+            targets: slug,
+            scale: {from: 0, to: 1},
+            duration: 1000
+        });
         
     }
 }

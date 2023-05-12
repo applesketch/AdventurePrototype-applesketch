@@ -1,6 +1,6 @@
 class Scene3 extends AdventureScene {
     constructor() {
-        super("scene3", "The second room has a long name (it truly does).");
+        super("scene3", "Office");
     }
 
     preload() {
@@ -10,6 +10,7 @@ class Scene3 extends AdventureScene {
     }
 
     onEnter() {
+        this.showMessage("Something feels really off...");
         this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
             .setFontSize(this.s * 2)
             .setInteractive()
