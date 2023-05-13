@@ -17,14 +17,18 @@ Experience requirements:
 Asset sources:
 - (For each image/audio/video asset used, describe how it was created. What tool did you use to create it? Was it based on another work? If so, how did you change it, and where can we learn more about the original work for comparison? Use [Markdown link syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#links).)
 
-- lobby = Positive Hopeful Dance Future Vision - Atmospheric Relaxing Royalty Free Stock Music and Audio _ Adobe Stock (mp3cut.net)
+- lobby = Positive Hopeful Dance by Future Vision - Atmospheric Relaxing Royalty Free Stock Music and Audio _ Adobe Stock (mp3cut.net)
     - Enhancement: Lowered volume and changed equilizer to Pop
-- music1 and music1_1 = Inspiring Smooth Lounge Resolute Audio - Atmospheric Relaxing Royalty Free Stock Music and Audio _ Adobe Stock (mp3cut.net)
+- music1 and music1_1 = Inspiring Smooth Lounge by Resolute Audio - Atmospheric Relaxing Royalty Free Stock Music and Audio _ Adobe Stock (mp3cut.net)
     - Enhancement: Lowered volume and altered pitch of music1_1 down 2%
-- music2 = Ambient Guitar Reflection Chill Out - Atmospheric Relaxing Royalty Free Stock Music and Audio _ Adobe Stock (mp3cut.net)
+- music2 = Ambient Guitar Reflection by Chill Out - Atmospheric Relaxing Royalty Free Stock Music and Audio _ Adobe Stock (mp3cut.net)
     - Enhancement: Lowered volume, altered pitch down, slowed down speed
-- music3 = Dreamy Tropical Electric Bopper Beats - Atmospheric Relaxing Royalty Free Stock Music and Audio _ Adobe Stock (mp3cut.net)
+- music3 = Dreamy Tropical Electric by Bopper Beats - Atmospheric Relaxing Royalty Free Stock Music and Audio _ Adobe Stock (mp3cut.net)
     - Enhancement: Lowered volume slightly, altered pitch down significantly, slowed down speed
+- fight = Mysterious Powerful by Future Voyage - Epic Powerful Royalty Free Stock Music and Audio _ Adobe Stock (mp3cut.net)
+    - Enhancement: Lowered volume and altered pitch down
+- victory = Lovely Memories by Benjamin Cornellus - Epic Royalty Free Stock Music and Audio _ Adobe Stock (mp3cut.net)
+    - Enhancement: Lowered volume and sped up
 
 Code sources:
 - `adventure.js` and `index.html` were created for this project [Adam Smith](https://github.com/rndmcnlly) and edited by me.
