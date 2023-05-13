@@ -5,7 +5,9 @@ class Scene3 extends AdventureScene {
 
     preload() {
         this.load.path = "./img/";
-        this.load.image("slug", "slug.png"); // img couch, tv, table, coffee
+        this.load.image("slug", "slug.png");
+        this.load.image("odesk", "odesk.png");
+        this.load.image("dishes", "dishes.png");
         this.load.audio("music2", "music2.mp3");
     }
 
@@ -16,10 +18,9 @@ class Scene3 extends AdventureScene {
 
         let odesk = this.add.sprite(600, 900, "odesk")
             .setInteractive()
-            .on('pointerover', () => this.showMessage("It's a professor's office."));
+            .on('pointerover', () => this.showMessage("It's a professor's desk."));
 
-        let dishes = this.add.text(this.w * 0.5, this.w * 0.1, "dishes")
-            .setFontSize(this.s * 2)
+        let dishes = this.add.sprite(this.w * 0.5, this.w * 0.1, "dishes")
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("The professor's dirty dishes. Help them clean it or else.")
@@ -47,9 +48,9 @@ class Scene3 extends AdventureScene {
             })
             .on('pointerdown', () => {
                 if (this.hasItem("Dirty dishes")) {
-                    this.showMessage("*SSSSQQQUUUUEEEAAAAKKK*");
-                    this.gotoScene('scene3');
-                    music1_1.stop();
+                    this.showMessage("*SSQUEEEAAKK*");
+                    this.gotoScene('scene4');
+                    music2.stop();
                 }
             })
 
@@ -65,6 +66,9 @@ class Scene3 extends AdventureScene {
                     duration: 500
                 });
             })
-            .on('pointerdown', () => this.gotoScene('slug'));   
+            .on('pointerdown', () => {
+                this.gotoScene('slug');
+                music2.stop();
+            });   
     }
 }

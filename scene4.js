@@ -1,37 +1,60 @@
 class Scene4 extends AdventureScene {
     constructor() {
-        super("scene4", "The second room has a long name (it truly does).");
+        super("scene4", "Kitchen");
     }
 
     preload() {
         this.load.path = "./img/";
-        this.load.image("studio", "studio.png");
-        this.load.audio("boom", "boom.mp3");
+        this.load.image("knife", "knife.png");
+        this.load.image("sink", "sink.png");
+        this.load.audio("music3", "music3.mp3");
     }
 
     onEnter() {
-        this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
-            .setFontSize(this.s * 2)
+        this.showMessage("The unsettling feeling grows...");
+        let music3 = this.sound.add('music3');
+        music3.play();
+
+        let knife = this.add.sprite(600, 900, "knife")
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("You've got no other choice, really.");
+                this.showMessage("Knife.")
             })
             .on('pointerdown', () => {
-                this.gotoScene('scene1');
-            });
-
-        let finish = this.add.text(this.w * 0.6, this.w * 0.2, '(finish the game)')
-            .setInteractive()
-            .on('pointerover', () => {
-                this.showMessage('*giggles*');
+                this.gainItem('Knife');
                 this.tweens.add({
-                    targets: finish,
-                    x: this.s + (this.h - 2 * this.s) * Math.random(),
-                    y: this.s + (this.h - 2 * this.s) * Math.random(),
-                    ease: 'Sine.inOut',
-                    duration: 500
+                    targets: knife,
+                    y: `-=${2 * this.s}`,
+                    alpha: { from: 1, to: 0 },
+                    duration: 500,
+                    onComplete: () => knife.destroy()
                 });
             })
-            .on('pointerdown', () => this.gotoScene('outro'));
+
+        let sink = this.add.sprite(this.w * 0.5, this.w * 0.1, "sink")
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("Sink.")
+            })
+            .on('pointerdown', () => {
+                this.showMessage("Dishes washed.");
+                this.loseItem('Dirty dishes');
+            })
+        let door = this.add.sprite(300, 250, "door")
+            .setInteractive()
+            .on('pointerover', () => {
+                if (this.hasItem("Knife")) {
+                    this.showMessage("You are ready for the final boss.");
+                } else {
+                    this.showMessage("Prepare yourself.");
+                }
+            })
+            .on('pointerdown', () => {
+                if (this.hasItem("Knife")) {
+                    this.showMessage("*Prepare yourself.*");
+                    this.gotoScene('boss');
+                    music3.stop();
+                }
+            })
     }
 }

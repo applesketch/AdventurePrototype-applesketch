@@ -2,17 +2,17 @@ class Scene1 extends AdventureScene {
     constructor() {
         super("scene1", "Classroom");
     }
-
     preload() {
         this.load.path = "./img/";
         this.load.image("door", "door.png");
+        this.load.image("pp", "pp.png");
         this.load.image("desk", "desk.png");
+        this.load.audio("lobby", "lobby.mp3");
         this.load.audio("music1", "music1.mp3");
     }
-
     onEnter() {
-
-        this.sound.add("music1").play();
+        let music1 = this.sound.add('music1');
+        music1.play();
 
         let desk1 = this.add.sprite(300, 900, "desk")
             .setInteractive()
@@ -57,15 +57,14 @@ class Scene1 extends AdventureScene {
                 });
             });
 
-        let pp = this.add.text(this.w * 0.5, this.w * 0.1, "paper and pencil")
-            .setFontSize(this.s * 2)
+        let pp = this.add.sprite(this.w * 0.5, this.w * 0.1, "pp")
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("It's a piece of paper and pencil.")
             })
             .on('pointerdown', () => {
                 this.showMessage("You pick up the paper and pencil.");
-                this.gainItem('Paper and pancil');
+                this.gainItem('Paper and pencil');
                 this.tweens.add({
                     targets: pp,
                     y: `-=${2 * this.s}`,
@@ -74,23 +73,22 @@ class Scene1 extends AdventureScene {
                     onComplete: () => pp.destroy()
                 });
             })
-
         let door = this.add.sprite(300, 250, "door")
             .setInteractive()
             .on('pointerover', () => {
-                if (this.hasItem("Paper and pancil")) {
+                if (this.hasItem("Paper and pencil")) {
                     this.showMessage("You are ready to head to the next room.");
                 } else {
                     this.showMessage("You should probably take something with you before you leave...");
                 }
             })
             .on('pointerdown', () => {
-                if (this.hasItem("Paper and pancil")) {
-                    this.loseItem("Paper and pancil");
+                if (this.hasItem("Paper and pencil")) {
                     this.showMessage("*loud obnoxious creaking noise*");
                     this.gotoScene('scene2');
+                    music1.stop();
                 }
-            })
+            });
 
     }
 }

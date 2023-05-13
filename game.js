@@ -5,6 +5,7 @@ class Scene1 extends AdventureScene {
     preload() {
         this.load.path = "./img/";
         this.load.image("door", "door.png");
+        this.load.image("pp", "pp.png");
         this.load.image("desk", "desk.png");
         this.load.audio("lobby", "lobby.mp3");
         this.load.audio("music1", "music1.mp3");
@@ -56,8 +57,7 @@ class Scene1 extends AdventureScene {
                 });
             });
 
-        let pp = this.add.text(this.w * 0.5, this.w * 0.1, "paper and pencil")
-            .setFontSize(this.s * 2)
+        let pp = this.add.sprite(this.w * 0.5, this.w * 0.1, "pp")
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("It's a piece of paper and pencil.")
@@ -99,7 +99,11 @@ class Scene2 extends AdventureScene {
     }
     preload() {
         this.load.path = "./img/";
-        this.load.image("slug", "slug.png"); // img couch, tv, table, coffee
+        this.load.image("slug", "slug.png");
+        this.load.image("couch", "couch.png");
+        this.load.image("tv", "tv.png");
+        this.load.image("table", "table.png");
+        this.load.image("coffee", "coffee.png");
         this.load.image("door", "door.png");
         this.load.audio("music1_1", "music1_1.mp3");
     }
@@ -108,7 +112,7 @@ class Scene2 extends AdventureScene {
         let music1_1 = this.sound.add('music1_1');
         music1_1.play();
 
-        let table = this.add.sprite(600, 900, "table")
+        let table = this.add.sprite(800, 500, "table")
             .setInteractive()
             .on('pointerover', () => this.showMessage("It's a table."))
             .on('pointerdown', () => {
@@ -122,7 +126,7 @@ class Scene2 extends AdventureScene {
                     duration: 100
                 });
             });
-        let couch = this.add.sprite(600, 900, "couch")
+        let couch = this.add.sprite(800, 800, "couch")
             .setInteractive()
             .on('pointerover', () => this.showMessage("It's a couch. Very comfy."))
             .on('pointerdown', () => {
@@ -136,7 +140,7 @@ class Scene2 extends AdventureScene {
                     duration: 100
                 });
             });
-        let tv = this.add.sprite(900, 900, "tv")
+        let tv = this.add.sprite(800, 300, "tv")
             .setInteractive()
             .on('pointerover', () => this.showMessage("It's a TV."))
             .on('pointerdown', () => {
@@ -168,8 +172,7 @@ class Scene2 extends AdventureScene {
                 music1_1.stop();
             });   
         
-        let coffee = this.add.text(this.w * 0.5, this.w * 0.1, "coffee")
-            .setFontSize(this.s * 2)
+        let coffee = this.add.sprite(this.w * 0.5, this.w * 0.1, "coffee")
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("Someone's coffee. Smells pretty good and you are quite thirsty. I'm sure whoever's this is won't miss it...")
@@ -213,6 +216,8 @@ class Scene3 extends AdventureScene {
     preload() {
         this.load.path = "./img/";
         this.load.image("slug", "slug.png");
+        this.load.image("odesk", "odesk.png");
+        this.load.image("dishes", "dishes.png");
         this.load.audio("music2", "music2.mp3");
     }
 
@@ -223,10 +228,9 @@ class Scene3 extends AdventureScene {
 
         let odesk = this.add.sprite(600, 900, "odesk")
             .setInteractive()
-            .on('pointerover', () => this.showMessage("It's a professor's office."));
+            .on('pointerover', () => this.showMessage("It's a professor's desk."));
 
-        let dishes = this.add.text(this.w * 0.5, this.w * 0.1, "dishes")
-            .setFontSize(this.s * 2)
+        let dishes = this.add.sprite(this.w * 0.5, this.w * 0.1, "dishes")
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("The professor's dirty dishes. Help them clean it or else.")
@@ -286,6 +290,8 @@ class Scene4 extends AdventureScene {
 
     preload() {
         this.load.path = "./img/";
+        this.load.image("knife", "knife.png");
+        this.load.image("sink", "sink.png");
         this.load.audio("music3", "music3.mp3");
     }
 
@@ -310,14 +316,13 @@ class Scene4 extends AdventureScene {
                 });
             })
 
-        let sink = this.add.text(this.w * 0.5, this.w * 0.1, "sink")
-            .setFontSize(this.s * 2)
+        let sink = this.add.sprite(this.w * 0.5, this.w * 0.1, "sink")
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("Sink.")
             })
             .on('pointerdown', () => {
-                this.showMessage("You wash the dirty dishes.");
+                this.showMessage("Dishes washed.");
                 this.loseItem('Dirty dishes');
             })
         let door = this.add.sprite(300, 250, "door")
@@ -368,7 +373,13 @@ class Boss extends Phaser.Scene {
                 this.gotoScene('outro');
                 fight.stop();
             });   
-        
+        this.input.on('pointerdown', () => {
+            this.time.delayedCall(500, () => {
+                this.cameras.main.fadeOut(500, 255,255,255);
+            }); 
+            this.scene.start('outro');
+                fight.stop();
+            });
     }
 }
 

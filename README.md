@@ -1,21 +1,20 @@
-A simple adventure game by {who?} based on a simple adventure game engine by [Adam Smith](https://github.com/rndmcnlly).
+A simple adventure game by Sabrina Pan based on a simple adventure game engine by [Adam Smith](https://github.com/rndmcnlly).
 
 Code requirements:
-- **4+ scenes based on `AdventureScene`**: unsatisfied (name at least 4 of the classes).
-- **2+ scenes *not* based on `AdventureScene`**: unsatisfied (name the classes).
+- **4+ scenes based on `AdventureScene`**: Scene 1, 2, 3, 4.
+- **2+ scenes *not* based on `AdventureScene`**: Intro, Outro, Menu, Slug, Boss.
 - **2+ methods or other enhancement added to the adventure game engine to simplify my scenes**:
-    - Enhancement 1: unsatisfied (name the method and explain the use of it).
-    - Enhancement 2: unsatisfied (name the method and explain the use of it).
+    - Enhancement 1: .play().
+    - Enhancement 2: .stop().
 
 Experience requirements:
-- **4+ locations in the game world**: unsatisfied (name at least 4 of the classes).
-- **2+ interactive objects in most scenes**: unsatisfied (describe two examples)
-- **Many objects have `pointerover` messages**: unsatisfied (describe two examples)
-- **Many objects have `pointerdown` effects**: unsatisfied (describe two examples)
-- **Some objects are themselves animated**: unsatisfied (describe two examples)
+- **4+ locations in the game world**: Classroom, Lounge, Office, Kitchen, Boss Fight.
+- **2+ interactive objects in most scenes**: desk, door
+- **Many objects have `pointerover` messages**: couch, tv
+- **Many objects have `pointerdown` effects**: paper and pencil, coffee
+- **Some objects are themselves animated**: slug
 
 Asset sources:
-- (For each image/audio/video asset used, describe how it was created. What tool did you use to create it? Was it based on another work? If so, how did you change it, and where can we learn more about the original work for comparison? Use [Markdown link syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#links).)
 
 - lobby = Positive Hopeful Dance by Future Vision - Atmospheric Relaxing Royalty Free Stock Music and Audio _ Adobe Stock (mp3cut.net)
     - Enhancement: Lowered volume and changed equilizer to Pop
