@@ -2,7 +2,6 @@ class Scene1 extends AdventureScene {
     constructor() {
         super("scene1", "Classroom");
     }
-
     preload() {
         this.load.path = "./img/";
         this.load.image("door", "door.png");
@@ -10,11 +9,9 @@ class Scene1 extends AdventureScene {
         this.load.audio("lobby", "lobby.mp3");
         this.load.audio("music1", "music1.mp3");
     }
-
     onEnter() {
-
-        this.sound.add("music1").play();
-        this.sound.add("lobby").pause();
+        let music1 = this.sound.add('music1');
+        music1.play();
 
         let desk1 = this.add.sprite(300, 900, "desk")
             .setInteractive()
@@ -76,7 +73,6 @@ class Scene1 extends AdventureScene {
                     onComplete: () => pp.destroy()
                 });
             })
-
         let door = this.add.sprite(300, 250, "door")
             .setInteractive()
             .on('pointerover', () => {
@@ -90,9 +86,9 @@ class Scene1 extends AdventureScene {
                 if (this.hasItem("Paper and pancil")) {
                     this.showMessage("*loud obnoxious creaking noise*");
                     this.gotoScene('scene2');
-                    this.sound.add("music1").pause();
+                    music1.stop();
                 }
-            })
+            });
 
     }
 }
@@ -100,6 +96,115 @@ class Scene1 extends AdventureScene {
 class Scene2 extends AdventureScene {
     constructor() {
         super("scene2", "Lounge");
+    }
+    preload() {
+        this.load.path = "./img/";
+        this.load.image("slug", "slug.png"); // img couch, tv, table, coffee
+        this.load.image("door", "door.png");
+        this.load.audio("music1_1", "music1_1.mp3");
+    }
+    onEnter() {
+        this.showMessage("Something feels off...");
+        let music1_1 = this.sound.add('music1_1');
+        music1_1.play();
+
+        let table = this.add.sprite(600, 900, "table")
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("It's a table."))
+            .on('pointerdown', () => {
+                this.showMessage("Stop trying to put large furniture into your inventory it won't work.");
+                this.tweens.add({
+                    targets: table,
+                    x: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            });
+        let couch = this.add.sprite(600, 900, "couch")
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("It's a couch. Very comfy."))
+            .on('pointerdown', () => {
+                this.showMessage("Don't even try to carry this out the room.");
+                this.tweens.add({
+                    targets: couch,
+                    x: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            });
+        let tv = this.add.sprite(900, 900, "tv")
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("It's a TV."))
+            .on('pointerdown', () => {
+                this.showMessage("Please leave the TV here. It is not up for grabs.");
+                this.tweens.add({
+                    targets: tv,
+                    x: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            });
+
+        let slug = this.add.sprite(this.w * 0.6, this.w * 0.2, "slug")
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage('💨💨💨');
+                this.tweens.add({
+                    targets: slug,
+                    x: this.s + (this.h - 2 * this.s) * 1000,
+                    y: this.s + (this.h - 2 * this.s) * 1000,
+                    ease: 'Sine.inOut',
+                    duration: 500
+                });
+                music1_1.stop();
+            })
+            .on('pointerdown', () => this.gotoScene('slug'));    
+        
+        let coffee = this.add.text(this.w * 0.5, this.w * 0.1, "coffee")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("Someone's coffee. Smells pretty good and you are quite thirsty. I'm sure whoever's this is won't miss it...")
+            })
+            .on('pointerdown', () => {
+                this.showMessage("You take the cup of coffee.");
+                this.gainItem('Coffee');
+                this.tweens.add({
+                    targets: pp,
+                    y: `-=${2 * this.s}`,
+                    alpha: { from: 1, to: 0 },
+                    duration: 500,
+                    onComplete: () => pp.destroy()
+                });
+            })
+        let door = this.add.sprite(300, 250, "door")
+            .setInteractive()
+            .on('pointerover', () => {
+                if (this.hasItem("Coffee")) {
+                    this.showMessage("You are ready to head to the next room.");
+                } else {
+                    this.showMessage("You should probably take something with you before you leave...");
+                }
+            })
+            .on('pointerdown', () => {
+                if (this.hasItem("Coffee")) {
+                    this.showMessage("*loud obnoxious creaking noise*");
+                    this.gotoScene('scene2');
+                    music1_1.stop();
+                }
+            })  
+    }
+}
+
+class Scene3 extends AdventureScene {
+    constructor() {
+        super("scene3", "Office");
     }
 
     preload() {
@@ -109,17 +214,52 @@ class Scene2 extends AdventureScene {
     }
 
     onEnter() {
-        // this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
-        //     .setFontSize(this.s * 2)
-        //     .setInteractive()
-        //     .on('pointerover', () => {
-        //         this.showMessage("You've got no other choice, really.");
-        //     })
-        //     .on('pointerdown', () => {
-        //         this.gotoScene('scene1');
-        //     });
+        this.showMessage("Something does not feel right...... A shiver runs down your spine");
+        let music2 = this.sound.add('music2');
+        music2.play();
 
-        this.showMessage("Something feels off...");
+        let table = this.add.sprite(600, 900, "table")
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("It's a table."))
+            .on('pointerdown', () => {
+                this.showMessage("Stop trying to put large furniture into your inventory it won't work.");
+                this.tweens.add({
+                    targets: table,
+                    x: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            });
+        let couch = this.add.sprite(600, 900, "couch")
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("It's a couch. Very comfy."))
+            .on('pointerdown', () => {
+                this.showMessage("Don't even try to carry this out the room.");
+                this.tweens.add({
+                    targets: couch,
+                    x: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            });
+        let tv = this.add.sprite(900, 900, "tv")
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("It's a TV."))
+            .on('pointerdown', () => {
+                this.showMessage("Please leave the TV here. It is not up for grabs.");
+                this.tweens.add({
+                    targets: tv,
+                    x: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            });
 
         let slug = this.add.sprite(this.w * 0.6, this.w * 0.2, "slug")
             .setInteractive()
@@ -127,13 +267,14 @@ class Scene2 extends AdventureScene {
                 this.showMessage('💨💨💨');
                 this.tweens.add({
                     targets: slug,
-                    x: this.s + (this.h - 2 * this.s) * Math.random(),
-                    y: this.s + (this.h - 2 * this.s) * Math.random(),
+                    x: this.s + (this.h - 2 * this.s) * 1000,
+                    y: this.s + (this.h - 2 * this.s) * 1000,
                     ease: 'Sine.inOut',
                     duration: 500
                 });
             })
-            .on('pointerdown', () => this.gotoScene('outro'));
+            .on('pointerdown', () => this.gotoScene('slug')); 
+            music2.stop();    
     }
 }
 
@@ -148,7 +289,7 @@ class Intro extends Phaser.Scene {
     }
     create() {
         let studio = this.add.sprite(900, 500, "studio");
-        this.sound.add("boom").play();
+        this.sound.add('boom').play();
         this.time.delayedCall(1500, () => {
             this.cameras.main.fadeOut(1000, 255,255,255);
             this.time.delayedCall(900, () => this.scene.start('menu'));
@@ -170,6 +311,7 @@ class Menu extends Phaser.Scene {
 
     create() {
         let title = this.add.sprite(1000, 300, "title");
+        let lobby = this.sound.add('lobby')
         let box = this.add.text(800, 500, "PLAY")
         .setFontSize(100);       
 
@@ -178,8 +320,9 @@ class Menu extends Phaser.Scene {
                 this.cameras.main.fadeOut(2000, 255,255,255);
             }); 
             this.scene.start('scene1');
+            lobby.stop();
             });
-        this.sound.add("lobby").play();
+        lobby.play();
 
         let slug = this.add.sprite(300, 300, "slug");
         this.add.tween({
@@ -202,6 +345,17 @@ class Outro extends Phaser.Scene {
     }
 }
 
+class Slug extends Phaser.Scene {
+    constructor() {
+        super('slug');
+    }
+    create() {
+        this.add.text(200, 200, "Upon touching the slug, a wave of fatigue overcomes you...").setFontSize(50);
+        this.add.text(this.w * 20, this.h * 20, "Click to restart.").setFontSize(30);
+        this.input.on('pointerdown', () => this.scene.start('intro'));
+    }
+}
+
 
 const game = new Phaser.Game({
     scale: {
@@ -210,6 +364,6 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, Menu, Scene1, Scene2, Outro],
+    scene: [Intro, Menu, Scene1, Scene2, Scene3, Outro, Slug],
     title: "Escape",
 });
