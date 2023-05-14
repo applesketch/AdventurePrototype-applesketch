@@ -28,7 +28,7 @@ class Scene1 extends AdventureScene {
                     duration: 100
                 });
             });
-        let desk2 = this.add.sprite(600, 900, "desk")
+        let desk2 = this.add.sprite(700, 900, "desk")
             .setInteractive()
             .on('pointerover', () => this.showMessage("It's a desk."))
             .on('pointerdown', () => {
@@ -42,7 +42,7 @@ class Scene1 extends AdventureScene {
                     duration: 100
                 });
             });
-        let desk3 = this.add.sprite(900, 900, "desk")
+        let desk3 = this.add.sprite(1100, 900, "desk")
             .setInteractive()
             .on('pointerover', () => this.showMessage("It's a desk."))
             .on('pointerdown', () => {
@@ -57,7 +57,7 @@ class Scene1 extends AdventureScene {
                 });
             });
 
-        let pp = this.add.sprite(this.w * 0.5, this.w * 0.1, "pp")
+        let pp = this.add.sprite(this.w * 0.5, 600, "pp")
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("It's a piece of paper and pencil.")
@@ -73,7 +73,7 @@ class Scene1 extends AdventureScene {
                     onComplete: () => pp.destroy()
                 });
             })
-        let door = this.add.sprite(300, 250, "door")
+        let door = this.add.sprite(300, 400, "door")
             .setInteractive()
             .on('pointerover', () => {
                 if (this.hasItem("Paper and pencil")) {
@@ -112,7 +112,7 @@ class Scene2 extends AdventureScene {
         let music1_1 = this.sound.add('music1_1');
         music1_1.play();
 
-        let table = this.add.sprite(800, 500, "table")
+        let table = this.add.sprite(1000, 600, "table")
             .setInteractive()
             .on('pointerover', () => this.showMessage("It's a table."))
             .on('pointerdown', () => {
@@ -126,7 +126,7 @@ class Scene2 extends AdventureScene {
                     duration: 100
                 });
             });
-        let couch = this.add.sprite(800, 800, "couch")
+        let couch = this.add.sprite(1000, 800, "couch")
             .setInteractive()
             .on('pointerover', () => this.showMessage("It's a couch. Very comfy."))
             .on('pointerdown', () => {
@@ -140,7 +140,7 @@ class Scene2 extends AdventureScene {
                     duration: 100
                 });
             });
-        let tv = this.add.sprite(800, 300, "tv")
+        let tv = this.add.sprite(1000, 300, "tv")
             .setInteractive()
             .on('pointerover', () => this.showMessage("It's a TV."))
             .on('pointerdown', () => {
@@ -172,7 +172,7 @@ class Scene2 extends AdventureScene {
                 music1_1.stop();
             });   
         
-        let coffee = this.add.sprite(this.w * 0.5, this.w * 0.1, "coffee")
+        let coffee = this.add.sprite(this.w * 0.5, 500, "coffee")
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("Someone's coffee. Smells pretty good and you are quite thirsty. I'm sure whoever's this is won't miss it...")
@@ -189,7 +189,7 @@ class Scene2 extends AdventureScene {
                     onComplete: () => coffee.destroy()
                 });
             })
-        let door = this.add.sprite(300, 250, "door")
+        let door = this.add.sprite(300, 400, "door")
             .setInteractive()
             .on('pointerover', () => {
                 if (this.hasItem("Coffee")) {
@@ -226,11 +226,11 @@ class Scene3 extends AdventureScene {
         let music2 = this.sound.add('music2');
         music2.play();
 
-        let odesk = this.add.sprite(600, 900, "odesk")
+        let odesk = this.add.sprite(1000, 800, "odesk")
             .setInteractive()
             .on('pointerover', () => this.showMessage("It's a professor's desk."));
 
-        let dishes = this.add.sprite(this.w * 0.5, this.w * 0.1, "dishes")
+        let dishes = this.add.sprite(this.w * 0.5, 700, "dishes")
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("The professor's dirty dishes. Help them clean it or else.")
@@ -247,7 +247,7 @@ class Scene3 extends AdventureScene {
                     onComplete: () => dishes.destroy()
                 });
             })
-        let door = this.add.sprite(300, 250, "door")
+        let door = this.add.sprite(300, 400, "door")
             .setInteractive()
             .on('pointerover', () => {
                 if (this.hasItem("Dirty dishes")) {
@@ -325,7 +325,7 @@ class Scene4 extends AdventureScene {
                 this.showMessage("Dishes washed.");
                 this.loseItem('Dirty dishes');
             })
-        let door = this.add.sprite(300, 250, "door")
+        let door = this.add.sprite(300, 400, "door")
             .setInteractive()
             .on('pointerover', () => {
                 if (this.hasItem("Knife")) {
@@ -393,7 +393,7 @@ class Intro extends Phaser.Scene {
         this.load.audio("boom", "boom.mp3");
     }
     create() {
-        let studio = this.add.sprite(900, 500, "studio");
+        let studio = this.add.sprite(980, 500, "studio");
         this.sound.add('boom').play();
         this.time.delayedCall(1500, () => {
             this.cameras.main.fadeOut(1000, 255,255,255);
@@ -415,9 +415,9 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
-        let title = this.add.sprite(1000, 300, "title");
+        let title = this.add.sprite(950, 300, "title");
         let lobby = this.sound.add('lobby')
-        let box = this.add.text(800, 500, "PLAY")
+        let box = this.add.text(830, 500, "PLAY")
         .setFontSize(100);       
 
         this.input.on('pointerdown', () => {
@@ -429,7 +429,7 @@ class Menu extends Phaser.Scene {
             });
         lobby.play();
 
-        let slug = this.add.sprite(300, 300, "slug");
+        let slug = this.add.sprite(1000, 800, "slug");
         this.add.tween({
             targets: slug,
             scale: {from: 0, to: 1},
